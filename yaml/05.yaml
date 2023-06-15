@@ -1,0 +1,35 @@
+# kubectl create cm kuard-file-config --from-file=yaml/appsettings.json -o yaml --dry-run=client > yaml/05.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kuard-file-config
+data:
+  appsettings.json: |-
+    {
+        "Logging": {
+            "LogLevel": {
+                "Default": "Information",
+                "Microsoft.AspNetCore": "Warning"
+            }
+        },
+        "AllowedHosts": "*"
+    }
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kuard
+  labels:
+    name: kuard
+spec:
+  containers:
+  - name: kuard
+    image: gcr.io/kuar-demo/kuard-amd64:1
+    volumeMounts:
+    - name: config-volume
+      mountPath: /config
+    resources: {}
+  volumes:
+  - name: config-volume
+    configMap:
+      name: kuard-file-config
