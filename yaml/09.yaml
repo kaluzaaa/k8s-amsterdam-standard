@@ -17,7 +17,7 @@ spec:
         cpu: "0.2"
     readinessProbe:
       httpGet:
-        path: /healthy
+        path: /ready
         port: 8080
       initialDelaySeconds: 5
       timeoutSeconds: 1
