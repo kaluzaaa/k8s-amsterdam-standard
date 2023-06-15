@@ -15,12 +15,3 @@ spec:
       limits:
         memory: "256Mi"
         cpu: "0.2"
-  - name: kuard1
-    image: gcr.io/kuar-demo/kuard-amd64:1
-    resources:
-      requests:
-        memory: "128Mi"
-        cpu: "0.1" # 1 vCPU = 1.0 = 1000m | 0.1 = 100m
-      limits:
-        memory: "256Mi"
-        cpu: "0.2"
