@@ -1,0 +1,26 @@
+# kubectl create secret generic  kuard-file-secret --from-file=yaml/appsettings.json -o yaml --dry-run=client > yaml/06.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kuard-file-secret
+data:
+  appsettings.json: ewogICAgIkxvZ2dpbmciOiB7CiAgICAgICAgIkxvZ0xldmVsIjogewogICAgICAgICAgICAiRGVmYXVsdCI6ICJJbmZvcm1hdGlvbiIsCiAgICAgICAgICAgICJNaWNyb3NvZnQuQXNwTmV0Q29yZSI6ICJXYXJuaW5nIgogICAgICAgIH0KICAgIH0sCiAgICAiQWxsb3dlZEhvc3RzIjogIioiCn0=
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kuard
+  labels:
+    name: kuard
+spec:
+  containers:
+  - name: kuard
+    image: gcr.io/kuar-demo/kuard-amd64:1
+    volumeMounts:
+    - name: config-volume
+      mountPath: /config
+    resources: {}
+  volumes:
+  - name: config-volume
+    secret:
+      secretName: kuard-file-secret
