@@ -15,7 +15,7 @@ spec:
       limits:
         memory: "256Mi"
         cpu: "0.2"
-    livelinessProbe:
+    livenessProbe:
       httpGet:
         path: /healthy
         port: 8080
