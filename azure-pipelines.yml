@@ -23,7 +23,7 @@ stages:
             buildContext: 'src/.'
         - task: PublishPipelineArtifact@1
           inputs:
-            targetPath: '$(Pipeline.Workspace)/k8s'
+            targetPath: 'k8s'
             artifact: 'manifest'
             publishLocation: 'pipeline'
 
