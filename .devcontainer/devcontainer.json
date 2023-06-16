@@ -19,7 +19,8 @@
 				"ms-vscode.azurecli",
 				"ms-azure-devops.azure-pipelines",
 				"ms-kubernetes-tools.vscode-aks-tools",
-				"ms-dotnettools.csdevkit"
+				"ms-dotnettools.csdevkit",
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	}
