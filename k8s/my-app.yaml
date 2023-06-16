@@ -41,7 +41,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: #{ENVIRONMENT_NAME}#.20-102-29-117.nip.io
+  - host: #{ENVIRONMENT_NAME}#.#{HOSTNAME}#
     http:
       paths:
       - path: /
