@@ -22,7 +22,8 @@ spec:
         - containerPort: 3000
         volumeMounts:
         - name: my-app-config
-          mountPath: /App/
+          mountPath: /App/appsettings.json
+          subPath: appsettings.json
       volumes:
       - name: my-app-config
         configMap:
