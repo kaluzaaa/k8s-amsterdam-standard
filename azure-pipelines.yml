@@ -21,6 +21,11 @@ stages:
             command: 'buildAndPush'
             Dockerfile: 'src/Dockerfile'
             buildContext: 'src/.'
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(Pipeline.Workspace)/k8s'
+            artifact: 'manifest'
+            publishLocation: 'pipeline'
 
   - stage: DeployTest
     displayName: 'Deploy to TEST'
@@ -38,6 +43,14 @@ stages:
                - task: CmdLine@2
                  inputs:
                    script: 'printenv'
+               - task: DownloadPipelineArtifact@2
+                 inputs:
+                   buildType: 'current'
+                   artifactName: 'manifest'
+                   targetPath: '$(Pipeline.Workspace)'
+               - task: CmdLine@2
+                 inputs:
+                   script: 'ls -la'
                - task: KubernetesManifest@1
                  inputs:
                    action: 'deploy'
