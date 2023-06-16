@@ -108,7 +108,7 @@ stages:
                  inputs:
                    action: 'deploy'
                    connectionType: 'kubernetesServiceConnection'
-                   kubernetesServiceConnection: 'my-app-test-as-test-1686907435574'
+                   kubernetesServiceConnection: 'my-app-prod-as-prod-1686907474780'
                    namespace: '$(namespace)'
                    manifests: '$(bake.manifestsBundle)'
                    rolloutStatusTimeout: '120'
