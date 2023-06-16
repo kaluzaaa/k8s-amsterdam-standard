@@ -9,7 +9,6 @@ configMapGenerator:
   name: my-app-config
   behavior: replace
 patches:
-- path: deployment.yaml
 - target:
     group: networking.k8s.io
     version: v1
