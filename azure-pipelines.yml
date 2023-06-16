@@ -31,7 +31,7 @@ stages:
     displayName: 'Deploy to TEST'
     dependsOn: Build
     variables:
-      HOSTNAME: '20-102-29-117.nip.io'
+      namespace: test
     jobs:
       - deployment: DeployTest
         displayName: 'Deploy to TEST'
@@ -60,12 +60,13 @@ stages:
                    containers: 'asdemoacr.azurecr.io/api/my-app:$(Build.BuildId)'
                    renderType: 'kustomize'
                    kustomizationPath: '$(Pipeline.Workspace)/test'
+                   namespace: '$(namespace)'
                - task: KubernetesManifest@1
                  inputs:
                    action: 'deploy'
                    connectionType: 'kubernetesServiceConnection'
                    kubernetesServiceConnection: 'my-app-test-as-test-1686907435574'
-                   namespace: 'test'
+                   namespace: '$(namespace)'
                    manifests: '$(myBake.manifestsBundle)'
                    rolloutStatusTimeout: '120'
               
