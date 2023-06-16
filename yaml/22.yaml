@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: helloapp
+  template:
+    metadata:
+      labels:
+        app: helloapp
+    spec:
+      containers:
+      - name: srv
+        image: poznajkubernetes/helloapp:svc
+        resources: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloapp
+spec:
+  selector:
+    app: helloapp
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: helloapp
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: kaluzny.20-102-29-117.nip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: helloapp
+            port:
+              number: 8080
