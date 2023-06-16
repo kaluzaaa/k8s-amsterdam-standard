@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: asdemoacr.azurecr.io/api/kaluzny:ca1
+        image: asdemoacr.azurecr.io/api/my-app
         resources:
           limits:
             memory: "128Mi"
