@@ -30,6 +30,8 @@ stages:
   - stage: DeployTest
     displayName: 'Deploy to TEST'
     dependsOn: Build
+    variables:
+      HOSTNAME: '20-102-29-117.nip.io'
     jobs:
       - deployment: DeployTest
         displayName: 'Deploy to TEST'
