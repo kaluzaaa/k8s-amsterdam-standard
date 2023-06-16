@@ -72,7 +72,7 @@ stages:
               
   - stage: DeployProd
     displayName: 'Deploy to PROD'
-    dependsOn: Build
+    dependsOn: DeployTest
     variables:
       namespace: prod
     jobs:
