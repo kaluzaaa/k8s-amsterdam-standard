@@ -53,27 +53,20 @@ stages:
                - task: CmdLine@2
                  inputs:
                    script: 'ls -la $(Pipeline.Workspace)'
-               - task: replacetokens@5
+               - task: KubernetesManifest@1
+                 name: bake
                  inputs:
-                   targetFiles: '$(Pipeline.Workspace)/my-app.yaml'
-                   encoding: 'auto'
-                   tokenPattern: 'default'
-                   writeBOM: true
-                   actionOnMissing: 'warn'
-                   keepToken: false
-                   actionOnNoFiles: 'continue'
-                   enableTransforms: false
-                   enableRecursion: false
-                   useLegacyPattern: false
-                   enableTelemetry: true
+                   action: 'bake'
+                   containers: 'asdemoacr.azurecr.io/api/my-app:$(Build.BuildId)'
+                   renderType: 'kustomize'
+                   kustomizationPath: '$(Pipeline.Workspace)/test'
                - task: KubernetesManifest@1
                  inputs:
                    action: 'deploy'
                    connectionType: 'kubernetesServiceConnection'
                    kubernetesServiceConnection: 'my-app-test-as-test-1686907435574'
                    namespace: 'test'
-                   manifests: '$(Pipeline.Workspace)/my-app.yaml'
-                   containers: 'asdemoacr.azurecr.io/api/my-app:$(Build.BuildId)'
+                   manifests: '$(myBake.manifestsBundle)'
                    rolloutStatusTimeout: '120'
               
 
