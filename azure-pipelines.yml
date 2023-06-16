@@ -22,4 +22,22 @@ stages:
             Dockerfile: 'src/Dockerfile'
             buildContext: 'src/.'
 
+  - stage: DeployTest
+    displayName: 'Deploy to TEST'
+    dependsOn: Build
+    jobs:
+      - deployment: DeployTest
+        displayName: 'Deploy to TEST'
+        pool:
+          vmImage: ubuntu-latest
+        environment: my-app-test
+        strategy:
+         runOnce:
+           deploy:
+             steps:
+               - task: CmdLine@2
+                 inputs:
+                   script: 'printenv'
+
+
 
