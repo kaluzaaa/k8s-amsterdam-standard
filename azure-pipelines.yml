@@ -57,7 +57,7 @@ stages:
                    connectionType: 'kubernetesServiceConnection'
                    kubernetesServiceConnection: 'my-app-test-as-test-1686907435574'
                    namespace: 'test'
-                   manifests: '$(Pipeline.Workspace)/manifest/my-app.yaml'
+                   manifests: '$(Pipeline.Workspace)/my-app.yaml'
                    containers: 'asdemoacr.azurecr.io/api/my-app:$(Build.BuildId)'
                    rolloutStatusTimeout: '120'
               
